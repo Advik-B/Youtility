@@ -1,5 +1,6 @@
-from PyQt6.QtWidgets import QProgressBar, QPushButton, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import QProgressBar, QPushButton, QHBoxLayout, QWidget
 from PyQt6.QtCore import QThread, pyqtSignal
+from PyQt6.QtSvg import QSvgRenderer
 from pytube import YouTube
 from requests import get
 
@@ -42,12 +43,13 @@ class DownloadWidget(QWidget):
         self.progressbar = QProgressBar()
         self.button = QPushButton("Download")
         self.button.clicked.connect(self.download)
+        self.button.setIcon(QSvgRenderer("assets/ui/download_black.svg"))
         self.url = url
         self.save_path = save_path
         self.condition = condition
         self.chunk_size = chunk_size
 
-        layout = QVBoxLayout()
+        layout = QHBoxLayout()
         layout.addWidget(self.progressbar)
         layout.addWidget(self.button)
         self.downloading = False
